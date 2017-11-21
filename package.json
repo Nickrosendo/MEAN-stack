@@ -1,0 +1,33 @@
+{
+  "name": "mean-stack",
+  "version": "1.0.0",
+  "description": "A project using the mean-stack",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nickrosendo/MEAN-stack.git"
+  },
+  "keywords": [
+    "mean-stack",
+    "node",
+    "javascript",
+    "mongodb",
+    "angular"
+  ],
+  "author": "Nicolas Oliveira Rosendo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nickrosendo/MEAN-stack/issues"
+  },
+  "homepage": "https://github.com/Nickrosendo/MEAN-stack#readme",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "consign": "^0.1.2",
+    "express": "^4.13.3",
+    "mongoose": "^4.3.1"
+  }
+}
