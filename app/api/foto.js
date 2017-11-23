@@ -1,11 +1,9 @@
-const mongoose = require("mongoose");
-
-const api = {};
-
-// let contador = fotos.length
+const mongoose = require("mongoose"),
+  api = {},
+  model = mongoose.model("Foto");
 
 api.lista = (req, res) => {
-  const model = mongoose.model("Foto");
+
   model.find({}).then(
     fotos => res.json(fotos),
     error => {
@@ -16,28 +14,53 @@ api.lista = (req, res) => {
 };
 
 api.adiciona = (req, res) => {
-  // let foto = req.body;
-  // foto._id = ++contador;
-  // fotos.push(foto);
-  // res.json(foto);
+  model.create(req.body)
+    .then(foto => {
+        res.json(foto);
+      },
+      (error) => {
+        console.log(error)
+        res.sendStatus(500).json(error);
+      }
+    );
 };
 
 api.atualiza = (req, res) => {
-  // let foto = req.body;
-  // fotoId = req.params.id;
-  // let indice = fotos.findIndex( foto => foto._id == fotoId);
-  // fotos[indice] = foto;
-  // res.sendStatus(200);
+
+  model.findByIdAndUpdate(req.params.id, req.body)
+    .then(foto => res.json(foto),
+      (error) => {
+        console.log(error)
+        res.status(500).json(error);
+      }
+    );
 };
 
 api.buscaPorId = (req, res) => {
-  // let foto = fotos.find( foto => foto._id == req.params.id)
-  // res.json(foto)
+  model.findById(req.params.id)
+    .then(
+      foto => {
+        if (!foto) throw new Error('Foto não encontrada');
+        res.json(foto)
+      },
+      error => {
+        console.log(error)
+        res.sendStatus(404).json(error);
+      }
+    );
 };
 
 api.removePorId = (req, res) => {
-  // let foto = fotos.filter( foto => foto._id != req.params.id)
-  // res.sendStatus(204)
+
+  model.remove({
+      _id: req.params.id
+    })
+    .then(() => res.sendStatus(204),
+      (error) => {
+        console.log(error)
+        res.status(500).json(error);
+      }
+    );
 };
 
 module.exports = api;
